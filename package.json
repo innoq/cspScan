@@ -1,0 +1,16 @@
+{
+  "name": "cspScan",
+  "version": "1.0.0",
+  "author": "Simon Kölsch <simon.koelsch@innoq.com>",
+  "description": "Scan a list of URIs if any Content-Security-Policy headers a set.",
+  "repository": { "type": "git", "url":"https://github.com/innoq/cspScan.git" },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "request": "2.67.0",
+    "queue3":	"1.0.3",
+    "minimist": "1.2.0"},
+  "bundledDependencies": [
+	   "request",
+     "queue3",
+     "minimist"]
+}
