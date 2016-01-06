@@ -149,14 +149,14 @@ var cspScan = {
 
 	parseValidArgs : function(args) {
 
-		if (args['v']) cspScan.verbose = true
-		if (args['t']) cspScan.requestOptions.timeout = args['t']
-		if (args['m']) cspScan.requestOptions.maxRedirects = args['m']
-		if (args['a']) cspScan.requestOptions.headers['User-Agent'] = args['a']
-		if (args['c']) cspScan.queueOptions.concurrency = args['c']
-		if (args['q']) cspScan.queueOptions.timeout = args['q']
+		if (args.v) cspScan.verbose = true
+		if (args.t) cspScan.requestOptions.timeout = args.t
+		if (args.m) cspScan.requestOptions.maxRedirects = args.m
+		if (args.a) cspScan.requestOptions.headers['User-Agent'] = args.a
+		if (args.c) cspScan.queueOptions.concurrency = args.c
+		if (args.q) cspScan.queueOptions.timeout = args.q
 
-		cspScan.init(args['_'][0])
+		cspScan.init(args._[0])
 	},
 
 	init : function(filepath) {
@@ -167,7 +167,7 @@ var cspScan = {
 	}
 }
 
-if(argv['help'] !== undefined || argv['_'] === undefined || argv['_'].length !== 1) {
+if(argv.help !== undefined || argv._ === undefined || argv._.length !== 1) {
 	cspScan.printUsage()
 } else {
 	cspScan.parseValidArgs(argv)
