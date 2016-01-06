@@ -48,13 +48,13 @@ var cspScan = {
 					var uri = cspScan.prefixHost(line)
 					request.head(uri, cspScan.requestOptions, function(error, response, body) {
 
-						if (!error && response.statusCode == 200) {
+						if (!error && response.statusCode === 200) {
 							cspScan.checkHeaders(uri, response)
-						} else if (error != undefined) {
+						} else if (error !== undefined) {
 							cspScan.error++
 							if (cspScan.verbose) console.log(uri,": error during scanning: ",error.message )
-						} else if (response.statusCode != 200){
-							if(response.statusCode == 405) {
+						} else if (response.statusCode !== 200){
+							if(response.statusCode === 405) {
 								cspScan.noHead++
 							}
 							if (cspScan.verbose) console.log(uri,": error during scanning: Status Code ",response.statusCode )
@@ -73,23 +73,23 @@ var cspScan = {
 	},
 
 	checkHeaders : function(uri, response) {
-		if (response.headers[cspScan.HEADER_CSP] != undefined) {
+		if (response.headers[cspScan.HEADER_CSP] !== undefined) {
 			cspScan.csp++
 			if (cspScan.verbose) console.log(uri,": Content-Security Header found")
 		}
 
-		if (response.headers[cspScan.HEADER_X_CSP] != undefined) {
+		if (response.headers[cspScan.HEADER_X_CSP] !== undefined) {
 			cspScan.cspX++
 			if (cspScan.verbose) console.log(uri, ": X-Content-Security Header found")
 		}
 
-		if (response.headers[cspScan.HEADER_WEBKIT_CSP] != undefined) {
+		if (response.headers[cspScan.HEADER_WEBKIT_CSP] !== undefined) {
 			cspScan.webkit++
 			if (cspScan.verbose) console.log(uri, ": X-Webkit-CSP Header found")
 		}
 
 		var xssProtection = response.headers[cspScan.HEADER_XSS]
-		if (xssProtection != undefined) {
+		if (xssProtection !== undefined) {
 			if (cspScan.verbose) console.log(uri,": X-XSS-Protection found with value (truncated):",xssProtection.substring(0,1))
 			if(xssProtection.startsWith("0")) {
 				cspScan.xssDisable++
@@ -167,7 +167,7 @@ var cspScan = {
 	}
 }
 
-if(argv['help'] != undefined || argv['_'] == undefined || argv['_'].length != 1) {
+if(argv['help'] !== undefined || argv['_'] === undefined || argv['_'].length !== 1) {
 	cspScan.printUsage()
 } else {
 	cspScan.parseValidArgs(argv)
