@@ -52,12 +52,12 @@ var cspScan = {
 							cspScan.checkHeaders(uri, response)
 						} else if (error !== undefined) {
 							cspScan.error++
-							if (cspScan.verbose) console.log(uri,": error during scanning: ",error.message )
+							if (cspScan.verbose) { console.log(uri,": error during scanning: ",error.message ) }
 						} else if (response.statusCode !== 200){
 							if(response.statusCode === 405) {
 								cspScan.noHead++
 							}
-							if (cspScan.verbose) console.log(uri,": error during scanning: Status Code ",response.statusCode )
+							if (cspScan.verbose) { console.log(uri,": error during scanning: Status Code ",response.statusCode ) }
 						}
 					})
 				})
@@ -75,22 +75,22 @@ var cspScan = {
 	checkHeaders : function(uri, response) {
 		if (response.headers[cspScan.HEADER_CSP] !== undefined) {
 			cspScan.csp++
-			if (cspScan.verbose) console.log(uri,": Content-Security Header found")
+			if (cspScan.verbose) { console.log(uri,": Content-Security Header found") }
 		}
 
 		if (response.headers[cspScan.HEADER_X_CSP] !== undefined) {
 			cspScan.cspX++
-			if (cspScan.verbose) console.log(uri, ": X-Content-Security Header found")
+			if (cspScan.verbose) { console.log(uri, ": X-Content-Security Header found") }
 		}
 
 		if (response.headers[cspScan.HEADER_WEBKIT_CSP] !== undefined) {
 			cspScan.webkit++
-			if (cspScan.verbose) console.log(uri, ": X-Webkit-CSP Header found")
+			if (cspScan.verbose) { console.log(uri, ": X-Webkit-CSP Header found") }
 		}
 
 		var xssProtection = response.headers[cspScan.HEADER_XSS]
 		if (xssProtection !== undefined) {
-			if (cspScan.verbose) console.log(uri,": X-XSS-Protection found with value (truncated):",xssProtection.substring(0,1))
+			if (cspScan.verbose) { console.log(uri,": X-XSS-Protection found with value (truncated):",xssProtection.substring(0,1)) }
 			if(xssProtection.startsWith("0")) {
 				cspScan.xssDisable++
 			} else if (xssProtection.startsWith("1")) {
@@ -149,12 +149,12 @@ var cspScan = {
 
 	parseValidArgs : function(args) {
 
-		if (args.v) cspScan.verbose = true
-		if (args.t) cspScan.requestOptions.timeout = args.t
-		if (args.m) cspScan.requestOptions.maxRedirects = args.m
-		if (args.a) cspScan.requestOptions.headers['User-Agent'] = args.a
-		if (args.c) cspScan.queueOptions.concurrency = args.c
-		if (args.q) cspScan.queueOptions.timeout = args.q
+		if (args.v) { cspScan.verbose = true }
+		if (args.t) { cspScan.requestOptions.timeout = args.t }
+		if (args.m) { cspScan.requestOptions.maxRedirects = args.m }
+		if (args.a) { cspScan.requestOptions.headers['User-Agent'] = args.a }
+		if (args.c) { cspScan.queueOptions.concurrency = args.c }
+		if (args.q) { cspScan.queueOptions.timeout = args.q }
 
 		cspScan.init(args._[0])
 	},
