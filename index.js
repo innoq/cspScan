@@ -2,8 +2,8 @@ var request = require('request')
 var util = require('util')
 var Queue = require('queue3');
 var argv = require('minimist')(process.argv.slice(2));
-var q = undefined
-var lineReader = undefined
+var q
+var lineReader
 
 var cspScan = {
 
