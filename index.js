@@ -1,5 +1,4 @@
 var request = require('request')
-var util = require('util')
 var Queue = require('queue3');
 var argv = require('minimist')(process.argv.slice(2));
 var q
@@ -41,12 +40,12 @@ var cspScan = {
 		lineReader.on('line', function (line) {
 
 			if (cspScan.validLine(line)) {
-			  q.push(function(fn){
+			  q.push(function(){
 
 					cspScan.total++
 
 					var uri = cspScan.prefixHost(line)
-					request.head(uri, cspScan.requestOptions, function(error, response, body) {
+					request.head(uri, cspScan.requestOptions, function(error, response) {
 
 						if (!error && response.statusCode === 200) {
 							cspScan.checkHeaders(uri, response)
@@ -66,7 +65,7 @@ var cspScan = {
 
 		console.log("all URIs scheduled, waiting for results...")
 
-		process.on('beforeExit', function(code) {
+		process.on('beforeExit', function() {
 			cspScan.printResult();
 		});
 
